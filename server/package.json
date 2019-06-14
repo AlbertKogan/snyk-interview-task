@@ -1,0 +1,25 @@
+{
+  "name": "snyk-interview-task-server",
+  "version": "0.0.1",
+  "description": "NPM dependencies tree implementation (Snyk interview task)",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlbertKogan/snyk-interview-task.git"
+  },
+  "keywords": [
+    "npm",
+    "dependencies",
+    "tree",
+    "server"
+  ],
+  "author": "Albert Kogan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlbertKogan/snyk-interview-task/issues"
+  },
+  "homepage": "https://github.com/AlbertKogan/snyk-interview-task#readme"
+}
