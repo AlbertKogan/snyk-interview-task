@@ -1,0 +1,5 @@
+*/node_modules/
+.idea/
+/tmp
+/client/build/*.js
+/client/build/*.css
