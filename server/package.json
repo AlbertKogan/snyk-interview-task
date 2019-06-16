@@ -1,10 +1,9 @@
 {
   "name": "snyk-interview-task-server",
   "version": "0.0.1",
-  "description": "NPM dependencies tree implementation (Snyk interview task)",
-  "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "start": "$(npm bin)/nodemon ./bin/www",
+    "test": "$(npm bin)/jest"
   },
   "repository": {
     "type": "git",
@@ -21,5 +20,19 @@
   "bugs": {
     "url": "https://github.com/AlbertKogan/snyk-interview-task/issues"
   },
-  "homepage": "https://github.com/AlbertKogan/snyk-interview-task#readme"
+  "homepage": "https://github.com/AlbertKogan/snyk-interview-task#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.4",
+    "debug": "^2.6.9",
+    "express": "^4.16.4",
+    "got": "^9.6.0",
+    "helmet": "^3.18.0",
+    "morgan": "^1.9.1",
+    "semver": "^6.1.1",
+    "validate-npm-package-name": "^3.0.0"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1"
+  }
 }
