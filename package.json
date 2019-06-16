@@ -4,7 +4,7 @@
   "description": "NPM dependencies tree implementation (Snyk interview task)",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "dev": "cd ./client && npm run dev & cd ./server && yarn start"
   },
   "repository": {
     "type": "git",
