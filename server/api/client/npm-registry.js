@@ -14,9 +14,7 @@ class NPMRegistryClient {
 
   search ({ value }) {
     const parameters = {
-      text: value,
-      quality: 1.0,
-      popularity: 1.0
+      text: value
     };
     return this.getData({
       path: `/-/v1/search?${querystring.stringify(parameters)}`

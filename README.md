@@ -6,6 +6,10 @@ NPM dependencies tree implementation (Snyk interview task)
 * Node
 * Redis
 
+### Install requirements
+
+`npm run install`
+
 ### Start both backend and client:
 
 `npm run dev`
