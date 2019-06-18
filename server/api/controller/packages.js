@@ -18,9 +18,11 @@ const getPackagesAll = async (_packageName) => {
     // if (type === 'remote') {
     //     return { [input] : {version: null } };
     // }
-
     const packageData = await client.getPackageData({name: input});
 
+    if (packageData instanceof Error) {
+      throw new Error('Fail to load package');
+    }
     const resolved = resolveDependency({
       allVersions: keys(packageData.versions),
       name: packageData.name,
@@ -70,9 +72,7 @@ const getPackagesAll = async (_packageName) => {
       childrenProperty: 'dependencies',
       customID: 'name'
     })
-  )).catch((error) => {
-    console.log('error', error);
-  });
+  ));
 };
 
 module.exports = {getPackagesAll};
