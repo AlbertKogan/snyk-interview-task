@@ -22,12 +22,18 @@
   },
   "homepage": "https://github.com/AlbertKogan/snyk-interview-task#readme",
   "dependencies": {
+    "array-to-tree": "^3.3.0",
     "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
     "debug": "^2.6.9",
     "express": "^4.16.4",
     "got": "^9.6.0",
     "helmet": "^3.18.0",
     "morgan": "^1.9.1",
+    "npm-package-arg": "^6.1.0",
+    "npm-registry-fetch": "^3.9.0",
+    "ramda": "^0.26.1",
+    "redis": "^2.8.0",
     "semver": "^6.1.1",
     "validate-npm-package-name": "^3.0.0"
   },

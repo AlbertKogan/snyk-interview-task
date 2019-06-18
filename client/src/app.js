@@ -1,26 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useReducer } from 'react';
+import Immutable from 'seamless-immutable';
 
-function App() {
+import './assets/app.css';
+import SearchInput from "./components/search-input";
+import DependenciesTree from "./components/dependencies-tree";
+
+const reducer = (state, { type, meta, payload}) => {
+  switch (type) {
+    case 'fetchData':
+      return Immutable({ ...state, data: payload });
+    case 'search':
+      return Immutable({ ...state, searchData: payload });
+    default:
+      throw new Error();
+  }
+};
+
+const App = () => {
+  const [state, dispatch] = useReducer(reducer, { data: Immutable({})});
+
+  const saveResponseData = ({ payload }) => dispatch({ type: 'fetchData' , payload});
+  const saveSearchData = ({ payload }) => dispatch({ type: 'search' , payload});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="appWrapper">
+      <div className="appContent">
+        <SearchInput saveResponseData={ saveResponseData }
+                     saveSearchData={ saveSearchData }
+                     searchData={ state.searchData }/>
+        <DependenciesTree data={ state.data }/>
+      </div>
     </div>
   );
-}
+};
 
 export default App;

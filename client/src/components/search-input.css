@@ -1,0 +1,23 @@
+.searchWrapper {
+    max-width: 400px;
+    position: relative;
+}
+
+.searchInput {
+    min-width: 300px;
+    font-size: 20px;
+    padding: 6px;
+    border-radius: 5px;
+    border: 1px solid #0000001f;
+}
+
+.searchButton {
+    background: white;
+    border: none;
+    position: absolute;
+    line-height: 0;
+    right: 2px;
+    top: 3px;
+    margin: 0;
+    padding: 4px;
+}

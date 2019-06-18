@@ -4,7 +4,8 @@
   "description": "NPM dependencies tree implementation (Snyk interview task)",
   "main": "index.js",
   "scripts": {
-    "dev": "cd ./client && PORT=3001 yarn start & cd ./server && npm run start"
+    "dev": "cd ./client && PORT=3001 yarn start & cd ./server && npm run start",
+    "clean-cache": "redis-cli flushall"
   },
   "repository": {
     "type": "git",

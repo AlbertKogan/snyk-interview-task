@@ -1,0 +1,10 @@
+.dependenciesTree {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dependenciesTreeItem {
+    margin: 0 10px;
+    padding: 4px;
+}
