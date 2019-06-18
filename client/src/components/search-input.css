@@ -1,10 +1,25 @@
 .searchWrapper {
-    max-width: 400px;
+    width: 100%;
+    position: sticky;
+    height: 50px;
+    background: white;
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.searchContent {
     position: relative;
+    display: flex;
+    flex: 1 0 auto;
+}
+
+.searchForm {
+    display: flex;
+    flex: 1 0 auto;
 }
 
 .searchInput {
-    min-width: 300px;
+    width: 100%;
     font-size: 20px;
     padding: 6px;
     border-radius: 5px;
@@ -19,5 +34,5 @@
     right: 2px;
     top: 3px;
     margin: 0;
-    padding: 4px;
+    padding: 10px;
 }

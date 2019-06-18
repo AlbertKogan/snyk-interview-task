@@ -28,7 +28,9 @@ const App = () => {
         <SearchInput saveResponseData={ saveResponseData }
                      saveSearchData={ saveSearchData }
                      searchData={ state.searchData }/>
-        <DependenciesTree data={ state.data }/>
+       <div className="appContentTreeWrapper">
+          <DependenciesTree data={ state.data }/>
+       </div>
       </div>
     </div>
   );

@@ -7,16 +7,16 @@ function DependenciesTree ({ data }) {
   if (data && !Object.entries(data).length || !data ) return null;
 
   return (
-    <ul className="dependenciesTree">
+    <div className="dependenciesTree">
       {
         Object.entries(data).map(([key, value], ) => {
-          return (<li className="dependenciesTreeItem" key={ key }>
-            <span>{ value.name } : { value.version } </span>
+          return (<div className="dependenciesTreeItem" key={ key }>
+            <div className="dependenciesTreeItemInner">{ value.name } : { value.version } </div>
             <DependenciesTree data={ value.dependencies } />
-          </li>)
+          </div>)
         })
       }
-    </ul>
+    </div>
   );
 }
 

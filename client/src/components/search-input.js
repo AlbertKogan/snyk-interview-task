@@ -40,7 +40,7 @@ const useSearch = ({ saveResponseData, saveSearchData }) => {
     });
   };
 
-  const debouncedSearch = debounce(search, 500);
+  const debouncedSearch = debounce(search, 200);
 
   const handleInputChange = (event) => {
     event.persist();
@@ -49,28 +49,41 @@ const useSearch = ({ saveResponseData, saveSearchData }) => {
     debouncedSearch({ name: event.target.value});
   };
 
-  console.log(inputs);
-  return { submitForm, handleInputChange, inputs, setName };
+  const handleEnterPress = (event) => {
+    if (event.keyCode === 13) {
+      // Cancel the default action, if needed
+      event.preventDefault();
+      // Trigger the button element with a click
+      submitForm(event)
+    }
+  };
+
+  return { submitForm, handleInputChange, inputs, setName, handleEnterPress };
 };
 
 const SearchInput = ({ saveResponseData, saveSearchData, searchData }) => {
-  const { submitForm, handleInputChange, inputs, setName } = useSearch({ saveResponseData, saveSearchData });
+  const { submitForm, handleInputChange, inputs, setName, handleEnterPress } = useSearch({ saveResponseData, saveSearchData });
 
   return (
     <div className="searchWrapper">
-      <form onSubmit={ submitForm }>
-        <input type="text"
-               name="package"
-               className="searchInput"
-               value={ inputs.package }
-               placeholder="react@16.0.0 or @babel/core"
-               onChange={ handleInputChange } />
-        <button type="submit" className="searchButton">
-          <SearchIcon />
-        </button>
-      </form>
-      <SearchBox data={ searchData }
-                 onItemClick={ setName } />
+      <div className="searchContent">
+        <form onSubmit={ submitForm } className="searchForm">
+          <input type="text"
+                 name="package"
+                 className="searchInput"
+                 value={ inputs.package }
+                 placeholder="react@16.0.0 or @babel/core"
+                 onKeyUp={ handleEnterPress }
+                 onChange={ handleInputChange } />
+          <button type="submit"
+                  onClick={ submitForm }
+                  className="searchButton">
+            <SearchIcon />
+          </button>
+        </form>
+        <SearchBox data={ searchData }
+                   onItemClick={ setName } />
+      </div>
     </div>
   );
 };

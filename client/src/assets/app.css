@@ -10,5 +10,11 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    max-width: 1200px;
+    width: 600px;
+}
+
+.appContentTreeWrapper {
+    overflow-x: auto;
+    max-height: 80vh;
+    width: 100%;
 }

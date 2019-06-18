@@ -36,6 +36,8 @@ const getPackagesAll = async (_packageName) => {
     _dependencies.push({
       name: packageData.name,
       version: packageVersion,
+      label: `${packageData.name} ${packageVersion}`,
+      key: `${packageData.name}-${packageVersion}`,
       parent
     });
 
