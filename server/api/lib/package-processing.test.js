@@ -1,8 +1,8 @@
 const {
   isPackageValid,
-  getNameAndVersion,
   extractDependencies,
-  resolveDependency
+  resolveDependency,
+  parseName
 } = require('./package-processing');
 
 test('isPackageValid', () => {
@@ -12,22 +12,11 @@ test('isPackageValid', () => {
   expect(isPackageValid("react@1.2.3")).toBe(true);
   expect(isPackageValid("@scope/react@1.2.3")).toBe(true);
 
-  expect(isPackageValid("@scope/react@134")).toBe(false);
-  expect(isPackageValid("   react@1.34")).toBe(false);
-});
+  expect(isPackageValid("@scope/react@134")).toBe(true);
+  expect(isPackageValid("   react@1.34")).toBe(true);
 
-test('getNameAndVersion', () => {
-  expect(getNameAndVersion("react")).toStrictEqual({
-    name: "react", version: "latest"
-  });
-
-  expect(getNameAndVersion("react@1.2.3")).toStrictEqual({
-    name: "react", version: "1.2.3"
-  });
-
-  expect(getNameAndVersion("@scope/react@1.2.3")).toStrictEqual({
-    name: "@scope/react", version: "1.2.3"
-  });
+  expect(isPackageValid("git://github.com/npm/cli.git#v1.0.27")).toBe(true);
+  expect(isPackageValid("git+ssh://git@github.com:npm/cli#semver:^5.0")).toBe(true);
 });
 
 test('extractDependencies', () => {
@@ -42,4 +31,13 @@ test('resolveDependency', () => {
   expect(
     resolveDependency({ name: "react", range: "^16.1.1", allVersions: ["16.1.1", "16.2.1"] })
   ).toStrictEqual({ "react": { version: "16.2.1" } });
+});
+
+test('parseName', () => {
+  expect(parseName('react')).toStrictEqual({ packageVersion: 'latest', packageName: 'react', type: 'tag' });
+  expect(parseName('react@1.2.3')).toStrictEqual({ packageVersion: '1.2.3', packageName: 'react', type: 'version' });
+  expect(parseName('@scope/react@1.2.3')).toStrictEqual({ packageVersion: '*', packageName: '@scope%2freact', type: 'version' });
+
+  expect(parseName('git://github.com/npm/cli.git#v1.0.27')).toStrictEqual({ packageVersion: '1.0.27', packageName: 'cli', type: 'git' });
+  expect(parseName('git+ssh://git@github.com:npm/cli#semver:^5.0')).toStrictEqual({ packageVersion: '^5.0', packageName: 'cli', type: 'git' });
 });

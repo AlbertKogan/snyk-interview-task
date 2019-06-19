@@ -30,9 +30,13 @@ const extractDependencies = (data) => {
  */
 const isPackageValid = (value) => {
   try {
-    npa(value);
+    if (!value || typeof value !== 'string') {
+      return false
+    }
 
-    return true;
+    npa(value.trim());
+
+    return true
   } catch (e) {
     console.log(e);
     return false
@@ -64,7 +68,13 @@ const parseName = (name) => {
     // Workaround for npm-registry (doe not support scoped packages with version)
     packageVersion = '*';
   } else if (parsed.type === 'git') {
-    packageVersion = 'latest';
+    if (parsed.gitCommittish) {
+      packageVersion = semver.clean(parsed.gitCommittish)
+    } else if (parsed.gitRange) {
+      packageVersion = parsed.gitRange
+    } else {
+      packageVersion = 'latest';
+    }
   }
 
   return { packageName, packageVersion, type: parsed.type };
