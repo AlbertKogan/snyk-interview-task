@@ -1,7 +1,6 @@
 .searchWrapper {
     width: 100%;
     position: sticky;
-    height: 50px;
     background: white;
     display: flex;
     flex: 1 0 auto;
@@ -11,11 +10,13 @@
     position: relative;
     display: flex;
     flex: 1 0 auto;
+    flex-direction: column;
 }
 
 .searchForm {
     display: flex;
     flex: 1 0 auto;
+    height: 50px;
 }
 
 .searchInput {
@@ -33,8 +34,6 @@
 .searchInputErrorMessage {
     color: #cc2727;
     padding: 5px;
-    position: absolute;
-    bottom: -30px;
 }
 
 .searchButton {
