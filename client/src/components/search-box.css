@@ -1,0 +1,20 @@
+.searchBoxWrapper {
+    top: 50px;
+    width: 100%;
+    box-shadow: 1px 1px 5px #cfcfcf;
+    background: white;
+    max-height: 300px;
+    overflow-y: auto;
+    border-radius: 5px;
+    margin-top: 0;
+    position: absolute;
+}
+
+.searchBoxItem {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.searchBoxItem:hover {
+    background: #8ddfff;
+}

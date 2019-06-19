@@ -1,44 +1,33 @@
-const url = require('url');
-const got = require('got');
-
-const NPM_REGISTRY_URL ='https://registry.npmjs.org';
+const npmFetch = require('npm-registry-fetch');
+const querystring = require('querystring');
 
 
 class NPMRegistryClient {
-  async getData ({ _url }) {
+  async getData ({ path }) {
     try {
-      const { body } = await got(_url, {
-        responseType: 'json'
-      });
-
-      return JSON.parse(body);
+      return await npmFetch.json(path);
     } catch (error) {
       console.log(error);
       return error;
     }
   }
-  getPackageDataExactVersion ({ name, version }) {
+
+  search ({ value }) {
+    const parameters = {
+      text: value
+    };
     return this.getData({
-      _url: url.resolve(NPM_REGISTRY_URL, `/${name}/${version}`)
+      path: `/-/v1/search?${querystring.stringify(parameters)}`
     });
   }
 
   getPackageData ({ name }) {
     return this.getData({
-      _url: url.resolve(NPM_REGISTRY_URL, `/${name}`)
+      path: `/${name}`
     });
-  }
-
-  collectPackageData ({ packages }) {
-    return Promise.all(
-      packages.map((name) => this.getPackageData({ name }))
-    ).then(
-      responses => responses.reduce((acc, response) => ({
-        ...acc,
-        [response.name]: Object.keys(response.versions)
-      }), {})
-    )
   }
 }
 
-module.exports = NPMRegistryClient;
+const client = new NPMRegistryClient();
+
+module.exports = client;

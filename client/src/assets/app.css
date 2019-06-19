@@ -1,0 +1,21 @@
+.appWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.appContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 600px;
+}
+
+.appContentTreeWrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 80vh;
+    width: 100%;
+}

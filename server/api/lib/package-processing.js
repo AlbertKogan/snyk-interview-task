@@ -1,4 +1,4 @@
-const validate = require('validate-npm-package-name');
+const npa = require('npm-package-arg');
 const semver = require('semver');
 
 /**
@@ -18,22 +18,6 @@ const extractDependencies = (data) => {
 };
 
 /**
- * Split input to package name (could contains @scope) and version
- * @param value
- * @returns {{name: string, version: string}}
- */
-const getNameAndVersion = (value) => {
-  // TODO: handle links
-  const trimmedValue = value.trim();
-  let [name, version] = trimmedValue.split('@').filter((item) => !!item);
-
-  version = version || 'latest';
-  name = trimmedValue.startsWith('@') ? `@${name}` : name;
-
-  return { name, version }
-};
-
-/**
  * Validate input. Valid names:
  * - package_name
  * - package_name@tag
@@ -45,19 +29,18 @@ const getNameAndVersion = (value) => {
  * @returns {boolean}
  */
 const isPackageValid = (value) => {
-  if (typeof value !== 'string') {
-    return false;
+  try {
+    if (!value || typeof value !== 'string') {
+      return false
+    }
+
+    npa(value.trim());
+
+    return true
+  } catch (e) {
+    console.log(e);
+    return false
   }
-
-  const { name, version } = getNameAndVersion(value);
-
-  if (version && version !== 'latest' && !semver.valid(version)) {
-    return false;
-  }
-
-  const { validForNewPackages, validForOldPackages} = validate(name);
-
-  return validForNewPackages && validForOldPackages;
 };
 
 /**
@@ -71,9 +54,36 @@ const resolveDependency = ({ name, range, allVersions }) => ({
   [name]: { version: semver.maxSatisfying(allVersions, range) }
 });
 
+/**
+ *
+ * @param name
+ * @returns {{packageVersion: string, packageName: *, type: *}}
+ */
+const parseName = (name) => {
+  const parsed = npa(name);
+  const packageName = parsed.escapedName || (parsed.hosted && parsed.hosted.project);
+  let packageVersion = parsed.scope ? '*' : parsed.fetchSpec;
+
+  if (parsed.scope) {
+    // Workaround for npm-registry (doe not support scoped packages with version)
+    packageVersion = '*';
+  } else if (parsed.type === 'git') {
+    if (parsed.gitCommittish) {
+      packageVersion = semver.clean(parsed.gitCommittish)
+    } else if (parsed.gitRange) {
+      packageVersion = parsed.gitRange
+    } else {
+      packageVersion = 'latest';
+    }
+  }
+
+  return { packageName, packageVersion, type: parsed.type };
+
+};
+
 module.exports = {
-  getNameAndVersion,
   isPackageValid,
   extractDependencies,
-  resolveDependency
+  resolveDependency,
+  parseName
 };

@@ -1,0 +1,17 @@
+.dependenciesTree {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 20px;
+    border-left: 1px solid #eeecec;
+}
+
+.dependenciesTree:first-child {
+    padding-left: 0;
+    border-left: none;
+    margin: 6px;
+}
+
+.dependenciesTreeItemInner {
+    padding: 4px 0;
+}
