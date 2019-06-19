@@ -2,8 +2,28 @@ const {
   isPackageValid,
   extractDependencies,
   resolveDependency,
-  parseName
+  parseName,
+  listToTree
 } = require('./package-processing');
+
+
+test('listToTree', () => {
+  expect(
+    listToTree([
+      [[{name: 'name1', version: 'value1', parent: null}]],
+      {name: 'name2', version: 'value2', parent: 'name1'}
+    ])
+  ).toStrictEqual({
+    "name": "name1",
+    "version": "value1",
+    "parent": null,
+    "dependencies": [{
+      "name": "name2",
+      "version": "value2",
+      "parent": "name1",
+    }]
+  });
+});
 
 test('isPackageValid', () => {
   expect(isPackageValid("react")).toBe(true);
