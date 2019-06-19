@@ -26,6 +26,17 @@
     border: 1px solid #0000001f;
 }
 
+.searchInputError {
+    border-color: #cc2727;
+}
+
+.searchInputErrorMessage {
+    color: #cc2727;
+    padding: 5px;
+    position: absolute;
+    bottom: -30px;
+}
+
 .searchButton {
     background: white;
     border: none;
@@ -35,4 +46,6 @@
     top: 3px;
     margin: 0;
     padding: 10px;
+    z-index: 10;
+    cursor: pointer;
 }

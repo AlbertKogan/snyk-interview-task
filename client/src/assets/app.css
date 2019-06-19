@@ -14,7 +14,8 @@
 }
 
 .appContentTreeWrapper {
-    overflow-x: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
     max-height: 80vh;
     width: 100%;
 }
