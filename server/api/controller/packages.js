@@ -1,23 +1,19 @@
 const {
   extractDependencies,
   resolveDependency,
-  parseName
+  parseName,
+  listToTree
 } = require('../lib/package-processing');
-const {pipe, flatten, uniq, keys, isEmpty, path} = require('ramda');
-const arrayToTree = require('array-to-tree');
+const {keys, isEmpty, path} = require('ramda');
 
 const client = require('../client/npm-registry');
 
 
-// TODO: fix nesting. currently only one nested
 const getPackagesAll = async (_packageName) => {
   let _dependencies = [];
   const {packageName, packageVersion} = parseName(_packageName);
 
   async function getPackagesDeep({input, version, parent = null}) {
-    // if (type === 'remote') {
-    //     return { [input] : {version: null } };
-    // }
     const packageData = await client.getPackageData({name: input});
 
     if (packageData instanceof Error) {
@@ -51,28 +47,18 @@ const getPackagesAll = async (_packageName) => {
     return await Promise.all(extractDependencies(
       packageData.versions[packageVersion]
     ).map(
-      (data) => {
-        return getPackagesDeep({
-          input: data.name,
-          version: data.version,
-          parent: packageData.name
-        })
-      }
+      (data) => getPackagesDeep({
+        input: data.name,
+        version: data.version,
+        parent: packageData.name
+      })
     ));
   }
 
   return getPackagesDeep({
     input: packageName,
     version: packageVersion
-  }).then(pipe(
-    flatten,
-    uniq,
-    (list) => arrayToTree(list, {
-      parentProperty: 'parent',
-      childrenProperty: 'dependencies',
-      customID: 'name'
-    })
-  ));
+  }).then(listToTree);
 };
 
 module.exports = {getPackagesAll};
