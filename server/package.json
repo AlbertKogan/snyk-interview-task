@@ -1,6 +1,6 @@
 {
   "name": "snyk-interview-task-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "start": "$(npm bin)/nodemon ./bin/www",
     "test": "$(npm bin)/jest"
