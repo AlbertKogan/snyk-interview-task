@@ -1,6 +1,6 @@
 {
   "name": "snyk-interview-task",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "NPM dependencies tree implementation (Snyk interview task)",
   "main": "index.js",
   "scripts": {
