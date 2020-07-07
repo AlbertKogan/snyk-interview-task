@@ -31,7 +31,7 @@
     "helmet": "^3.18.0",
     "morgan": "^1.9.1",
     "npm-package-arg": "^6.1.0",
-    "npm-registry-fetch": "^3.9.0",
+    "npm-registry-fetch": "^4.0.5",
     "ramda": "^0.26.1",
     "redis": "^2.8.0",
     "semver": "^6.1.1",
