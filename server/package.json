@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "scripts": {
     "start": "$(npm bin)/nodemon ./bin/www",
-    "test": "$(npm bin)/jest"
+    "test": "$(npm bin)/jest",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -27,18 +29,20 @@
     "cors": "^2.8.5",
     "debug": "^2.6.9",
     "express": "^4.16.4",
-    "got": "^9.6.0",
-    "helmet": "^3.18.0",
+    "got": "^11.8.5",
+    "helmet": "^3.21.1",
     "morgan": "^1.9.1",
     "npm-package-arg": "^6.1.0",
-    "npm-registry-fetch": "^3.9.0",
-    "ramda": "^0.26.1",
-    "redis": "^2.8.0",
+    "npm-registry-fetch": "^4.0.5",
+    "ramda": "^0.27.2",
+    "redis": "^3.1.1",
     "semver": "^6.1.1",
-    "validate-npm-package-name": "^3.0.0"
+    "validate-npm-package-name": "^3.0.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "jest": "^24.8.0",
     "nodemon": "^1.19.1"
-  }
+  },
+  "snyk": true
 }
