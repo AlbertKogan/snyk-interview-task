@@ -23,10 +23,10 @@
   "homepage": "https://github.com/AlbertKogan/snyk-interview-task#readme",
   "dependencies": {
     "array-to-tree": "^3.3.0",
-    "cookie-parser": "^1.4.4",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "debug": "^2.6.9",
-    "express": "^4.16.4",
+    "express": "^4.21.1",
     "got": "^9.6.0",
     "helmet": "^3.18.0",
     "morgan": "^1.9.1",
