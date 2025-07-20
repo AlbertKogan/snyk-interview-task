@@ -29,7 +29,7 @@
     "express": "^4.16.4",
     "got": "^9.6.0",
     "helmet": "^3.18.0",
-    "morgan": "^1.9.1",
+    "morgan": "^1.10.1",
     "npm-package-arg": "^6.1.0",
     "npm-registry-fetch": "^3.9.0",
     "ramda": "^0.26.1",
